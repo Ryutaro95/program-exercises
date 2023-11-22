@@ -41,14 +41,20 @@ func TestStringXorErrorCase(t *testing.T) {
 			expected: "",
 		},
 		{
-			desc:     "expect an error if s or t is an empty string",
+			desc:     "expect an error if s is an empty string",
 			s:        "",
+			t:        "00101",
+			expected: "",
+		},
+		{
+			desc:     "expect an error if t is an empty string",
+			s:        "10101",
 			t:        "",
 			expected: "",
 		},
 	}
 	for _, tC := range testCases {
-		t.Run("", func(t *testing.T) {
+		t.Run(tC.desc, func(t *testing.T) {
 			actual, err := stringsXOR(tC.s, tC.t)
 			if err == nil {
 				t.Error("expected an error, but got nil")

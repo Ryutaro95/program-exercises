@@ -13,7 +13,7 @@ func stringsXOR(s, t string) (string, error) {
 	sLenght := len(s)
 	tLenght := len(t)
 	if (sLenght != tLenght) || (sLenght <= 0) || (tLenght <= 0) {
-		return "", errors.New("The lenghts of s and t must be the same or both must be greater than or equal to 0")
+		return "", errors.New("the lengths of s and t must be the same or both must be greater than zero")
 	}
 	var answer string
 	for i := range s {
