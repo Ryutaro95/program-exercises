@@ -15,9 +15,9 @@ func TestLonelyInteger(t *testing.T) {
 
 	for _, tt := range cases {
 		t.Run(tt.description, func(t *testing.T) {
-			result := lonelyinteger(tt.arr)
-			if result != tt.expected {
-				t.Errorf("expected %d, but got %d", tt.expected, result)
+			actual := lonelyinteger(tt.arr)
+			if actual != tt.expected {
+				t.Errorf("expected %d, but got %d", tt.expected, actual)
 			}
 		})
 	}
