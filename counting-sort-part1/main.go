@@ -25,7 +25,7 @@ func countingSort(arr []int32) []int32 {
 		result[a]++
 	}
 
-	return result
+	return resulty
 }
 
 func main() {
