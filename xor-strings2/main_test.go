@@ -19,9 +19,42 @@ func TestStringXOR(t *testing.T) {
 	}
 	for _, tC := range testCases {
 		t.Run("", func(t *testing.T) {
-			actual := stringsXOR(tC.s, tC.t)
+			actual, err := stringsXOR(tC.s, tC.t)
+			if err != nil {
+				t.Errorf("Expected no error, but got %v", err)
+			}
 			if actual != tC.expected {
 				t.Errorf("expected %s, but got %s.", tC.expected, actual)
+			}
+		})
+	}
+}
+
+func TestStringXorErrorCase(t *testing.T) {
+	testCases := []struct {
+		desc, s, t, expected string
+	}{
+		{
+			desc:     "expect an error if the number of letters in s and t are different",
+			s:        "101",
+			t:        "00101",
+			expected: "",
+		},
+		{
+			desc:     "expect an error if s or t is an empty string",
+			s:        "",
+			t:        "",
+			expected: "",
+		},
+	}
+	for _, tC := range testCases {
+		t.Run("", func(t *testing.T) {
+			actual, err := stringsXOR(tC.s, tC.t)
+			if err == nil {
+				t.Error("expected an error, but got nil")
+			}
+			if actual != tC.expected {
+				t.Errorf("expected empty string, but got %s.", actual)
 			}
 		})
 	}

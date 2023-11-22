@@ -2,13 +2,19 @@ package main
 
 import (
 	"bufio"
+	"errors"
 	"fmt"
 	"io"
 	"os"
 	"strings"
 )
 
-func stringsXOR(s, t string) string {
+func stringsXOR(s, t string) (string, error) {
+	sLenght := len(s)
+	tLenght := len(t)
+	if (sLenght != tLenght) || (sLenght <= 0) || (tLenght <= 0) {
+		return "", errors.New("The lenghts of s and t must be the same or both must be greater than or equal to 0")
+	}
 	var answer string
 	for i := range s {
 		if s[i] == t[i] {
@@ -17,7 +23,7 @@ func stringsXOR(s, t string) string {
 			answer = fmt.Sprintf("%s%s", answer, "1")
 		}
 	}
-	return answer
+	return answer, nil
 }
 
 func main() {
