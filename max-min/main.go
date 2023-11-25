@@ -11,35 +11,36 @@ import (
 // 0 ≦ arr[i] ≦ 10^9
 
 func maxMinReverion(k int32, arr []int32) int32 {
-	unfairness := int32(math.MaxInt32)
+	minUnfairness := int32(math.MaxInt32)
 	sort.Slice(arr, func(i, j int) bool { return arr[i] < arr[j] })
+	// for start := 0; end := start + int(k) - 1; end < len(arr); start++ {
 	for i := 0; i < len(arr)-(int(k)-1); i++ {
-		min := arr[i]
-		max := arr[int(k)+i-1]
-		difference := max - min
-		if unfairness > difference {
-			unfairness = difference
+		minValue := arr[i]
+		maxValue := arr[int(k)+i-1]
+		difference := maxValue - minValue
+		if minUnfairness > difference {
+			minUnfairness = difference
 		}
 	}
 
-	return unfairness
+	return minUnfairness
 }
 
 func maxMin(k int32, arr []int32) int32 {
 	// arr の値は一意の値とは限らない
 	sort.Slice(arr, func(i, j int) bool { return arr[i] < arr[j] })
-	unfairness := math.MaxInt
+	minUnfairness := math.MaxInt
 	for i := range arr {
 		if len(arr)-1 < int(k)+i {
 			break
 		}
-		slice := arr[i : int(k)+i]
-		min, max := findMinMax(slice)
-		if unfairness > int(max-min) {
-			unfairness = int(max - min)
+		window := arr[i : int(k)+i]
+		minValue, maxValue := findMinMax(window)
+		if minUnfairness > int(maxValue-minValue) {
+			minUnfairness = int(maxValue - minValue)
 		}
 	}
-	return int32(unfairness) // 不公平 = max(4, 7) - min(4, 7) = 4, 7 = 3
+	return int32(minUnfairness) // 不公平 = max(4, 7) - min(4, 7) = 4, 7 = 3
 }
 
 func findMinMax(arr []int32) (int32, int32) {
