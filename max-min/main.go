@@ -11,24 +11,18 @@ import (
 // 0 ≦ arr[i] ≦ 10^9
 
 func maxMinReverion(k int32, arr []int32) int32 {
-	unfairness := math.MaxInt
+	unfairness := int32(math.MaxInt32)
 	sort.Slice(arr, func(i, j int) bool { return arr[i] < arr[j] })
-	//               i がここまでいったらループ終了
-	//                          ↓
-	// [1, 2, 3, 4, 10, 20, 30, 40, 100, 200]
-	// len(arr) = 10
-	// k = 4
-	// 10 - (4 - 1) = 7
 	for i := 0; i < len(arr)-(int(k)-1); i++ {
 		min := arr[i]
 		max := arr[int(k)+i-1]
-		total := max - min
-		if unfairness > int(total) {
-			unfairness = int(total)
+		difference := max - min
+		if unfairness > difference {
+			unfairness = difference
 		}
 	}
 
-	return int32(unfairness)
+	return unfairness
 }
 
 func maxMin(k int32, arr []int32) int32 {
