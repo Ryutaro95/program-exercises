@@ -17,6 +17,17 @@ var cases = []struct {
 	{desc: "Test 5", k: 2, arr: []int32{1, 2, 1, 2, 1}, expected: 0},
 }
 
+func TestMaxMinV2(t *testing.T) {
+	for _, tt := range cases {
+		t.Run(tt.desc, func(t *testing.T) {
+			actual := maxMinV2(tt.k, tt.arr)
+			if actual != tt.expected {
+				t.Errorf("expected %d, but got %d", tt.expected, actual)
+			}
+		})
+	}
+}
+
 func TestMaxMin(t *testing.T) {
 	for _, tt := range cases {
 		t.Run(tt.desc, func(t *testing.T) {

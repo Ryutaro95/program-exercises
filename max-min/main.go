@@ -10,6 +10,28 @@ import (
 // 2 ≦ k ≦ n
 // 0 ≦ arr[i] ≦ 10^9
 
+/* k = 2
+* [2, 9, 0, 2, 8]
+*     ↑
+* スタート位置を k - 1 から始めることで
+* maxMinReversion() よりも for の条件文をシンプルにした
+ */
+func maxMinV2(k int32, arr []int32) int32 {
+	minUnfairness := int32(math.MaxInt32)
+	sort.Slice(arr, func(i, j int) bool { return arr[i] < arr[j] })
+	for start, end := 0, k-1; int(end) < len(arr); end++ {
+		minValue := arr[start]
+		maxValue := arr[end]
+		difference := maxValue - minValue
+		if minUnfairness > difference {
+			minUnfairness = difference
+		}
+		start++
+	}
+
+	return minUnfairness
+}
+
 func maxMinReverion(k int32, arr []int32) int32 {
 	minUnfairness := int32(math.MaxInt32)
 	sort.Slice(arr, func(i, j int) bool { return arr[i] < arr[j] })
@@ -60,5 +82,5 @@ func findMinMax(arr []int32) (int32, int32) {
 func main() {
 	k := int32(4)
 	arr := []int32{1, 2, 3, 4, 10, 20, 30, 40, 100, 200}
-	maxMinReverion(k, arr)
+	maxMinV2(k, arr)
 }
