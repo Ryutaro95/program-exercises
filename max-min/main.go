@@ -32,7 +32,6 @@ func maxMinV2(k int32, arr []int32) int32 {
 	return minUnfairness
 }
 
-
 func maxMinReverion(k int32, arr []int32) int32 {
 	minUnfairness := int32(math.MaxInt32)
 	sort.Slice(arr, func(i, j int) bool { return arr[i] < arr[j] })
